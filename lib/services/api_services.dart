@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:movieflix/models/moviemodel.dart';
 
 class ApiServices {
   final String popularbaseURL =
@@ -16,8 +19,11 @@ class ApiServices {
       url,
     ); // await can only be used in the async function
     if (response.statusCode == 200) {
-      print(response.body);
-      return;
+      final jsonData = jsonDecode(response.body);
+      final movies = (jsonData['results'] as List<dynamic>);
+      for (var movie in movies) {
+        Moviemodel.fromJson(movie);
+      }
     }
     throw Error();
   }
