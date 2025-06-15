@@ -1,24 +1,28 @@
 class Moviemodel {
-  final String adult;
+  final bool adult;
   final String backdropPath;
-  final String genreIds;
-  final String id;
+  final List<int> genre_ids;
+  final int id;
   final String originalLanguage;
   final String originalTitle;
   final String overview;
-  final String popularity;
+  final double popularity;
   final String posterPath;
   final String releaseDate;
   final String title;
-  final String video;
-  final String voteAverage;
-  final String voteCount;
+  final bool video;
+  final double voteAverage;
+  final int voteCount;
   // Optional field
 
   Moviemodel.fromJson(Map<String, dynamic> json)
     : adult = json['adult'],
       backdropPath = json['backdrop_path'],
-      genreIds = json['genre_ids'],
+      genre_ids =
+          (json['genre_ids'] as List<dynamic>?)
+              ?.map((id) => id as int)
+              .toList() ??
+          [],
       id = json['id'],
       originalLanguage = json['original_language'],
       originalTitle = json['original_title'],
@@ -28,6 +32,6 @@ class Moviemodel {
       releaseDate = json['release_date'],
       title = json['title'],
       video = json['video'],
-      voteAverage = json['vote_average'],
+      voteAverage = (json['vote_average'] as num?)?.toDouble() ?? 0.0,
       voteCount = json['vote_count'];
 }

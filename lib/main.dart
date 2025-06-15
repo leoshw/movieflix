@@ -3,7 +3,6 @@ import 'package:movieflix/screens/homescreen.dart';
 import 'package:movieflix/services/api_services.dart';
 
 void main() {
-  ApiServices().getMoveis();
   runApp(const Mymovie());
 }
 
